@@ -1,0 +1,1 @@
+logToConsole("test");
