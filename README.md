@@ -1,4 +1,5 @@
 # WPRXY-GENTA
-wraith proxy gt[genta] 
+wraith api gt[genta] 
 
-- run proxy: [go file](./runscript.lua)
+- run api: [go file](./runscript.lua)
+- api docs/changelogs [go file](./main/CHANGELOGS.md)
