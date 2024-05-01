@@ -9,6 +9,7 @@ logToConsole(string.format("%s API successfully loaded.", API_CONF.TAG));
 
 local gt, peer, pkc, h = {}, {}, {}, {};
 local w = {};
+local command = { var = {} };
 
 -- defines
 h.add = AddHook;
@@ -79,6 +80,10 @@ peer.visualMessage = function(std)
     }, -1, 100);
 end
 
+peer.say = function(std)
+    sendPacket(2, string.format("action|input\n|text|%s", std));
+end
+
 function w.tcnewl(table)
     local _str = table.concat(table, "\n");
     return _str;
@@ -109,3 +114,44 @@ end
 
 
 
+-- string:x
+
+function string:split(sep)
+    local result = {}
+    for str in self:gmatch("([^"..sep.."]+)") do
+        table.insert(result, str)
+    end
+    return result
+end
+
+function w.await(func, t)
+  local s = os.clock()*1000
+  repeat
+    if t and os.clock() * 1000 - s >= t then
+      return
+    end
+    Sleep(10)
+  until func()
+end
+
+
+
+
+-- api custom commands
+h.add("onTextPacket", "wraith_eventpacket", function(type, p)
+    if p:find("/wraith") then
+        local helplist = {
+        	"add_label_with_icon|big|`^WraithAPI `0Information|left|5016|",
+            "add_spacer|big|",
+            "add_label_with_icon|small|`3API Owner:|left|482|",
+            "add_spacer|small|",
+            "add_textbox|`1discord: `0warfys#0",
+            "add_textbox|`6(note): If you have anything you would like to see added to the API or have found a bug, please contact me on discord.",
+            "add_spacer|small|",
+            "end_dialog|wraith_close|Close||"
+        }
+        return true;
+    end
+    
+    return false;
+end)
