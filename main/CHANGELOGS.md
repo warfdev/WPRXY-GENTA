@@ -18,6 +18,11 @@ peer.setMac = setMac;
 gt.raw = sendPacketRaw;
 gt.packet = sendPacket;
 peer.me = getLocal;
+
+
+-- variable(s);
+command.var = {}; -- You can define your command variables here.
+-- example; command.var.isPeerFly = false;
 ```
 
 #### Functions;
@@ -29,12 +34,19 @@ peer.
     enter(int x, int y);
     hit(int x, int y);
     visualMessage(str);
+    say(str);
 
 w.
     tcnewl(var);
     setInterval(function, int interval, ...);
     remColor(str);
+    await(function, int time);
 
 pkc.
     notify(str);
+
+
+-- string method(s)
+string:
+      split(str sep);
 ```
